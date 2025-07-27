@@ -5,4 +5,6 @@ numpy
 scikit-learn
 tensorflow
 pytest
-unittest
+xgboost
+matplotlib
+seaborn

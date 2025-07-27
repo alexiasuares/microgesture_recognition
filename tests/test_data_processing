@@ -35,5 +35,6 @@ def test_load_process_data(self, mock_read_csv):
     self.assertEqual(X_train.shape[1], 15)
     self.assertTrue(all(col in X_train.columns for col in data if col != 'label'))
 
+
 if __name__ == '__main__':
     unittest.main()
