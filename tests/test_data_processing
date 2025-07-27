@@ -1,0 +1,39 @@
+import unittest
+from unittest import mock
+import pandas as pd
+from src.data_processing import load_process_data
+
+
+@mock.patch('pandas.read_csv')
+def test_load_process_data(self, mock_read_csv):
+    
+    data = {
+        'no_of_face': [1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+        'face_x': [0]*10,
+        'face_y': [0]*10,
+        'face_w': [0]*10,
+        'face_h': [0]*10,
+        'face_con': [0]*10,
+        'no_of_hand': [0]*10,
+        'pose_x': [0]*10,
+        'pose_y': [0]*10,
+        'phone': [0]*10,
+        'phone_x': [0]*10,
+        'phone_y': [0]*10,
+        'phone_w': [0]*10,
+        'phone_h': [0]*10,
+        'phone_con': [0]*10,
+        'label': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+    }
+    df = pd.DataFrame(data)
+    mock_read_csv.return_value = df
+
+    X_train, X_val, X_test, y_train, y_val, y_test = load_process_data('fake.csv')
+
+    # Verifica se as divisões estão corretas
+    self.assertEqual(len(X_train) + len(X_val) + len(X_test), 10)
+    self.assertEqual(X_train.shape[1], 15)
+    self.assertTrue(all(col in X_train.columns for col in data if col != 'label'))
+
+if __name__ == '__main__':
+    unittest.main()
