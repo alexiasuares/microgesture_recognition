@@ -8,7 +8,7 @@ def main():
     X_train, X_val, X_test, y_train, y_val, y_test = load_process_data(csv_file)
     model = train_and_evaluate_model(X_train, X_val, X_test, y_train, y_val, y_test)
 
-    model.save_model('models/attention_detection_model.plk')
+    model.save_model('models/attention_detection_model.pkl')
 
 if __name__ == '__main__':
     main()
